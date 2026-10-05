@@ -1,8 +1,4 @@
 // public/js/scanner.js
-// O Zebra MC930B age como um teclado: ele "digita" o código e manda Enter.
-// A técnica aqui é diferenciar digitação humana de leitura de scanner
-// medindo o intervalo entre teclas — scanner é sempre muito mais rápido.
-
 const scannerInput = document.getElementById('scanner-input');
 const feedback = document.getElementById('scan-feedback');
 
@@ -36,7 +32,7 @@ scannerInput.addEventListener('keydown', (e) => {
     return;
   }
 
-  // se o intervalo entre teclas for grande demais, provavelmente é digitação humana
+  // se o intervalo entre teclas for grande demais, é digitação humana
   if (buffer.length > 0 && interval > SCAN_MAX_INTERVAL_MS) {
     fastStreak = false;
   }
