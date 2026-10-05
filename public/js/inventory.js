@@ -1,6 +1,4 @@
 // public/js/inventory.js
-// Catálogo: busca, filtros, renderização em 3 modos (lista/grade/detalhado),
-// cadastro, edição, remoção e ajuste rápido de quantidade.
 
 const state = {
   items: [],
