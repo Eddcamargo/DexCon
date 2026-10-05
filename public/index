@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventário</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <h1>Inventário</h1>
+    <div class="topbar-actions">
+      <button id="btn-export" class="btn">Exportar CSV</button>
+      <label class="btn" for="csv-import-input">Importar CSV</label>
+      <input type="file" id="csv-import-input" accept=".csv" class="hidden" />
+      <button id="btn-open-add" class="btn btn-primary">+ Novo item</button>
+    </div>
+  </header>
+
+  <div class="controls">
+    <input type="text" id="search-input" placeholder="Buscar por modelo, marca ou tag..." />
+
+    <select id="room-filter">
+      <option value="">Todas as salas</option>
+    </select>
+
+    <div class="view-toggle">
+      <button data-view="list" class="view-btn active">Lista</button>
+      <button data-view="grid" class="view-btn">Grade</button>
+      <button data-view="detailed" class="view-btn">Detalhado</button>
+    </div>
+  </div>
+
+  <!-- Campo invisível sempre focado para capturar leitura do scanner Zebra.
+       readonly + inputmode="none" evitam que o teclado virtual do celular
+       abra sozinho em smartphones comuns (o Zebra, por ser HID físico,
+       continua funcionando normalmente mesmo com essas duas restrições). -->
+  <input type="text" id="scanner-input" autocomplete="off" readonly inputmode="none" />
+
+  <div id="scan-feedback" class="scan-feedback hidden"></div>
+
+  <main id="items-container" class="view-list"></main>
+
+  <!-- Modal de cadastro/edição -->
+  <div id="item-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title">Novo item</h2>
+      <form id="item-form">
+        <input type="hidden" id="item-id" />
+
+        <label>Descrição *</label>
+        <input type="text" id="field-description" required />
+
+        <label>Modelo *</label>
+        <input type="text" id="field-model" required />
+
+        <label>Marca *</label>
+        <input type="text" id="field-brand" required />
+
+        <label>Quantidade *</label>
+        <input type="number" id="field-quantity" value="0" min="0" required />
+
+        <label>Sala</label>
+        <input type="text" id="field-room" value="sala1" list="room-suggestions" />
+        <datalist id="room-suggestions"></datalist>
+
+        <div class="modal-actions">
+          <button type="button" id="btn-cancel" class="btn">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de etiqueta / impressão -->
+  <div id="label-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Etiqueta</h2>
+      <div class="label-preview">
+        <img id="label-qrcode" alt="QR Code" />
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="btn-close-label" class="btn">Fechar</button>
+        <button type="button" id="btn-print-label" class="btn btn-primary">Imprimir</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/inventory.js"></script>
+  <script src="/js/scanner.js"></script>
+  <script src="/js/barcode.js"></script>
+</body>
+</html>
