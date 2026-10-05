@@ -1,0 +1,24 @@
+{
+  "name": "inventario-app",
+  "version": "1.0.0",
+  "description": "Inventário lightweight com scanner de código de barras",
+  "main": "server.js",
+  "bin": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "better-sqlite3": "^11.3.0",
+    "bwip-js": "^4.3.2"
+  },
+  "pkg": {
+    "assets": [
+      "public/**/*",
+      "node_modules/better-sqlite3/build/Release/*.node"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ]
+  }
+}
